@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Folder } from 'lucide-react';
+import { Card } from '../UI/card';
 
 interface Project {
   id: number;
@@ -25,7 +26,7 @@ export const Projects: React.FC = () => {
       tech: ['TypeScript', 'Node.js', 'Docker', 'React'],
       featured: true,
       publicLink: 'https://github.com/viniciusvalledev',
-      borderColor: '#5b686d'
+      borderColor: '#6699CC'
     },
     {
       id: 2,
@@ -139,12 +140,7 @@ export const Projects: React.FC = () => {
     }
   ];
 
-  const tentativePerPage = 6;
-  const idxLastWith6 = currentPage * tentativePerPage;
-  const idxFirstWith6 = idxLastWith6 - tentativePerPage;
-  const sliceWith6 = allProjects.slice(idxFirstWith6, idxLastWith6);
-  const projectsPerPage = sliceWith6.some(p => p.featured) ? 5 : 6;
-
+  const projectsPerPage = 8; // fixo
   const totalPages = Math.max(1, Math.ceil(allProjects.length / projectsPerPage));
   const effectivePage = Math.min(Math.max(1, currentPage), totalPages);
 
@@ -154,20 +150,49 @@ export const Projects: React.FC = () => {
 
   return (
     <div className="animate-fade-in space-y-6 py-4">
-      <div className="flex items-center gap-4 mb-10">
-        <Folder className="text-blue-500 w-5 h-5" strokeWidth={1.5} />
+      {/* estilos locais para animação e glow dos featured */}
+      <style>{`
+        .featured-glow {
+          position: relative;
+          overflow: visible;
+          transition: transform 0.35s ease, box-shadow 0.35s ease;
+          animation: float 6s ease-in-out infinite;
+        }
+
+        .featured-glow:hover {
+          transform: translateY(-8px) scale(1.01);
+          box-shadow: 0 10px 30px rgba(2,6,23,0.6);
+        }
+
+        .featured-glow::before {
+          content: '';
+          position: absolute;
+          inset: -8px;
+          z-index: -1;
+          border-radius: 10px;
+          background: linear-gradient(90deg, rgba(99,102,241,0.09), rgba(14,165,233,0.08), rgba(234,179,8,0.07));
+          filter: blur(14px);
+          opacity: 0.95;
+          animation: glow-slide 5s linear infinite;
+        }
+
+        @keyframes glow-slide { 0%{transform:translateX(-25%)}50%{transform:translateX(25%)}100%{transform:translateX(-25%)} }
+        @keyframes float { 0%{transform:translateY(0)}50%{transform:translateY(-6px)}100%{transform:translateY(0)} }
+      `}</style>
+
+      <div className="flex items-center gap-4 mb-6">
+        <Folder className="text-primary w-5 h-5" strokeWidth={1.5} />
         <div className="flex flex-col items-start">
-          <p className="text-[10px] font-mono tracking-[0.3em] text-blue-500 uppercase mb-1">Professional</p>
-          <h2 className="text-3xl font-bold text-white tracking-tight">
-            <span className="text-gray-500 font-mono font-normal">{"<"}</span>
+          <p className="text-[10px] font-mono tracking-[0.3em] text-primary uppercase mb-1">Professional</p>
+          <h2 className="text-3xl font-bold" style={{ color: 'var(--text)' }}>
+            <span className="text-muted font-mono font-normal">{"<"}</span>
             Projects
-            <span className="text-gray-500 font-mono font-normal">{"/>"}</span>
+            <span className="text-muted font-mono font-normal">{"/>"}</span>
           </h2>
         </div>
       </div>
 
-      <div className="grid grid-flow-row-dense auto-rows-fr grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
-        {/* Renderizar featured primeiro para prevenir quebra de layout quando featured estiver em posições arbitrárias */}
+      <div className="grid grid-flow-row-dense auto-rows-fr grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {(() => {
           const featuredThisPage = currentProjects.filter(fp => fp.featured);
           const normalThisPage = currentProjects.filter(fp => !fp.featured);
@@ -184,138 +209,125 @@ export const Projects: React.FC = () => {
               repoUrl = null;
             }
             const featuredIndex = p.featured ? featuredThisPage.findIndex(fp => fp.id === p.id) : -1;
-            
+
             if (p.featured) {
-              // Primeiro featured da página: ocupa 2 colunas em lg
+              // featured principal: destaque maior
               if (featuredIndex === 0) {
                 const content = (
-                  <div
-                    className="lg:col-span-2 lg:row-span-2 bg-[#0b101e] p-6 flex flex-col h-full relative transition-transform duration-300 ease-out group-hover:-translate-y-2 group-hover:scale-[1.01] group-hover:shadow-[0_10px_30px_rgba(59,130,246,0.12)] hover:shadow-[0_10px_30px_rgba(59,130,246,0.12)] featured-left"
-                  >
-                    <span className="text-[9px] text-zinc-500 font-mono tracking-[0.2em] uppercase mb-3">Featured Project</span>
-                    <h3 className="text-white text-xl font-bold tracking-tighter mb-1">{p.name}</h3>
-                    <p className="text-zinc-500 font-mono text-[9px] uppercase mb-4">{p.date}</p>
-                    <p className="text-[12px] text-zinc-400 leading-relaxed mb-6 font-light">{p.summary}</p>
-
-                    <div className="mt-auto">
-                      <div className="flex flex-wrap gap-1.5 mb-4">
-                        {p.tech.map((t) => (
-                          <span key={t} className="bg-[#121929] border border-zinc-800 px-2 py-0.5 text-[9px] font-mono text-zinc-400 uppercase">{t}</span>
-                        ))}
-                      </div>
-                      <div className="text-zinc-500 text-[9px] font-mono uppercase tracking-widest border-t border-zinc-800/50 pt-3 w-full text-left transition-colors">
-                        View Repository →
+                  <Card className="lg:col-span-2 lg:row-span-2 h-full flex flex-col featured-glow border border-white/5 rounded-lg overflow-hidden" borderColor="linear-gradient(180deg,var(--primary),var(--accent))">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <span className="text-[9px] text-muted font-mono tracking-[0.2em] uppercase mb-2 block">Featured Project</span>
+                        <h3 className="text-white text-2xl font-extrabold tracking-tight mb-1">
+                          {p.name}
+                        </h3>
+                        <p className="text-muted font-mono text-[9px] uppercase mb-4">{p.date}</p>
                       </div>
                     </div>
-                  </div>
+
+                    <p className="text-[13px] text-muted leading-relaxed mb-6 font-light">{p.summary}</p>
+
+                    <div className="mt-auto">
+                      <div className="flex flex-wrap gap-2 mb-4">
+                        {p.tech.map((t) => (
+                          <span key={t} className="brand-tag">{t}</span>
+                        ))}
+                      </div>
+
+                      <div className="text-primary text-sm font-semibold">View Repository →</div>
+                    </div>
+                  </Card>
                 );
 
                 return repoUrl ? (
-                  <a key={p.id} href={repoUrl} target="_blank" rel="noreferrer" aria-label={`Open ${p.name} repository`} className="lg:col-span-2 lg:row-span-2 no-underline block group">
-                    {content}
-                  </a>
+                  <a key={p.id} href={repoUrl} target="_blank" rel="noreferrer" aria-label={`Open ${p.name} repository`} className="lg:col-span-2 lg:row-span-2 no-underline block">{content}</a>
                 ) : (
                   <div key={p.id} className="lg:col-span-2 lg:row-span-2">{content}</div>
                 );
               }
 
-              // Segundo featured da página: ocupa 1 coluna em lg, mas recebe maior altura para preencher visualmente
+              // segundo featured: coluna simples mas altura maior
               if (featuredIndex === 1) {
                 const content = (
-                  <div
-                    className="lg:row-span-2 bg-[#0b101e] p-6 flex flex-col h-full transition-transform duration-300 ease-out group-hover:-translate-y-2 group-hover:scale-[1.01] group-hover:shadow-[0_10px_30px_rgba(59,130,246,0.12)] hover:shadow-[0_10px_30px_rgba(59,130,246,0.12)] featured-left"
-                  >
-                   <span className="text-[9px] font-bold text-gray-500 uppercase tracking-tight mb-2">Repository</span>
-                   <h3 className="text-white text-xl font-bold leading-tight mb-2">{p.name}</h3>
-                   <span className="font-mono text-[9px] text-gray-500 mb-4">{p.date}</span>
+                  <Card className="lg:row-span-2 h-full flex flex-col border border-white/5 rounded-lg overflow-hidden" borderColor="#334155">
+                    <div>
+                      <span className="text-[9px] font-bold text-muted uppercase tracking-tight mb-2">Repository</span>
+                      <h3 className="text-white text-xl font-bold leading-tight mb-2">{p.name}</h3>
+                      <span className="font-mono text-[9px] text-muted mb-4">{p.date}</span>
 
-                   <p className="text-[12px] text-gray-400 leading-relaxed mb-6 font-light">{p.summary}</p>
+                      <p className="text-[12px] text-muted leading-relaxed mb-6 font-light">{p.summary}</p>
+                    </div>
 
-                   <div className="mt-auto">
-                     <div className="flex flex-wrap gap-1 mb-4">
-                       {p.tech.map((tag) => (
-                         <span key={tag} className="font-mono text-[9px] px-2 py-0.5 bg-[#121929] border border-white/5 text-gray-400 uppercase">
-                           {tag}
-                         </span>
-                       ))}
-                     </div>
-                     <div className="text-zinc-500 text-[9px] font-mono uppercase tracking-widest border-t border-zinc-800/50 pt-3 w-full text-left transition-colors">
-                       View Repository →
-                     </div>
-                   </div>
-                 </div>
+                    <div className="mt-auto">
+                      <div className="flex flex-wrap gap-2 mb-4">
+                        {p.tech.map((tag) => (
+                          <span key={tag} className="brand-tag">{tag}</span>
+                        ))}
+                      </div>
+
+                      <div className="text-primary text-sm font-semibold">View Repository →</div>
+                    </div>
+                  </Card>
                 );
 
                 return repoUrl ? (
-                  <a key={p.id} href={repoUrl} target="_blank" rel="noreferrer" aria-label={`Open ${p.name} repository`} className="no-underline block group lg:col-span-1 lg:row-span-2">
-                    {content}
-                  </a>
+                  <a key={p.id} href={repoUrl} target="_blank" rel="noreferrer" aria-label={`Open ${p.name} repository`} className="no-underline block lg:col-span-1 lg:row-span-2">{content}</a>
                 ) : (
                   <div key={p.id} className="group lg:col-span-1 lg:row-span-2">{content}</div>
                 );
               }
 
-              // Outros featured (3º, 4º, ...) usam o estilo do primeiro por padrão
+              // fallback para outros featured
               const content = (
-                <div
-                  className="lg:col-span-2 bg-[#0b101e] p-6 flex flex-col h-full relative transition-transform duration-300 ease-out group-hover:-translate-y-2 group-hover:scale-[1.01] group-hover:shadow-[0_10px_30px_rgba(59,130,246,0.12)] hover:shadow-[0_10px_30px_rgba(59,130,246,0.12)] featured-left"
-                >
-                  <span className="text-[9px] text-zinc-500 font-mono tracking-[0.2em] uppercase mb-3">Featured Project</span>
-                  <h3 className="text-white text-xl font-bold tracking-tighter mb-1">{p.name}</h3>
-                  <p className="text-zinc-500 font-mono text-[9px] uppercase mb-4">{p.date}</p>
-                  <p className="text-[12px] text-zinc-400 leading-relaxed mb-6 font-light">{p.summary}</p>
+                <Card className="lg:col-span-2 h-full flex flex-col border border-white/5 rounded-lg overflow-hidden" borderColor="#334155">
+                  <div>
+                    <span className="text-[9px] text-muted font-mono tracking-[0.2em] uppercase mb-2 block">Featured Project</span>
+                    <h3 className="text-white text-2xl font-extrabold tracking-tight mb-1">{p.name}</h3>
+                    <p className="text-muted font-mono text-[9px] uppercase mb-4">{p.date}</p>
+                  </div>
+
+                  <p className="text-[13px] text-muted leading-relaxed mb-6 font-light">{p.summary}</p>
 
                   <div className="mt-auto">
-                    <div className="flex flex-wrap gap-1.5 mb-4">
+                    <div className="flex flex-wrap gap-2 mb-4">
                       {p.tech.map((t) => (
-                        <span key={t} className="bg-[#121929] border border-zinc-800 px-2 py-0.5 text-[9px] font-mono text-zinc-400 uppercase">{t}</span>
+                        <span key={t} className="brand-tag">{t}</span>
                       ))}
                     </div>
-                    <div className="text-zinc-500 text-[9px] font-mono uppercase tracking-widest border-t border-zinc-800/50 pt-3 w-full text-left transition-colors">
-                      View Repository →
-                    </div>
+
+                    <div className="text-primary text-sm font-semibold">View Repository →</div>
                   </div>
-                </div>
+                </Card>
               );
 
               return repoUrl ? (
-                <a key={p.id} href={repoUrl} target="_blank" rel="noreferrer" aria-label={`Open ${p.name} repository`} className="lg:col-span-2 no-underline block group">
-                  {content}
-                </a>
+                <a key={p.id} href={repoUrl} target="_blank" rel="noreferrer" aria-label={`Open ${p.name} repository`} className="lg:col-span-2 no-underline block">{content}</a>
               ) : (
                 <div key={p.id}>{content}</div>
               );
             }
 
+            // cartões normais
             const card = (
-              <div
-                className="bg-[#0b101e] border p-5 flex flex-col justify-between transition-transform duration-300 ease-out group-hover:-translate-y-2 group-hover:scale-[1.01] group-hover:shadow-[0_10px_30px_rgba(59,130,246,0.12)] hover:shadow-[0_10px_30px_rgba(59,130,246,0.12)] h-full"
-                style={{ borderColor: p.borderColor, borderLeftWidth: '4px' }}
-              >
+              <Card className="h-full flex flex-col justify-between" borderColor={p.borderColor}>
                 <div>
-                  <span className="text-[9px] font-bold text-gray-500 uppercase tracking-tight">Repository</span>
+                  <span className="text-[9px] font-bold text-muted uppercase tracking-tight">Repository</span>
                   <h3 className="text-sm font-bold text-white leading-tight mt-1 mb-1">{p.name}</h3>
-                  <span className="font-mono text-[9px] text-gray-500">{p.date}</span>
+                  <span className="font-mono text-[9px] text-muted">{p.date}</span>
                 </div>
                 
-                <p className="text-[11px] text-gray-400 line-clamp-3 font-light leading-relaxed my-3">
-                  {p.summary}
-                </p>
+                <p className="text-[11px] text-muted line-clamp-3 font-light leading-relaxed my-3">{p.summary}</p>
 
-                <div className="flex flex-wrap gap-1">
+                <div className="flex flex-wrap gap-2">
                   {p.tech.map((tag) => (
-                    <span key={tag} className="font-mono text-[9px] px-2 py-0.5 bg-[#121929] border border-white/5 text-gray-400 uppercase">
-                      {tag}
-                    </span>
+                    <span key={tag} className="brand-tag">{tag}</span>
                   ))}
                 </div>
-              </div>
+              </Card>
             );
 
             return repoUrl ? (
-              <a key={p.id} href={repoUrl} target="_blank" rel="noreferrer" aria-label={`Open ${p.name} repository`} className="no-underline block group" style={{ display: 'block' }}>
-                {card}
-              </a>
+              <a key={p.id} href={repoUrl} target="_blank" rel="noreferrer" aria-label={`Open ${p.name} repository`} className="no-underline block">{card}</a>
             ) : (
               <div key={p.id} className="group">{card}</div>
             );
@@ -325,9 +337,9 @@ export const Projects: React.FC = () => {
 
       {totalPages > 1 && (
         <div className="flex justify-center items-center gap-6 pt-8">
-          <button disabled={currentPage === 1} onClick={() => setCurrentPage(p => p - 1)} className="text-[10px] text-gray-500 hover:text-white disabled:opacity-20 uppercase font-mono tracking-widest transition-colors">Prev</button>
-          <span className="font-mono text-[10px] text-gray-600">{currentPage} / {totalPages}</span>
-          <button disabled={currentPage === totalPages} onClick={() => setCurrentPage(p => p + 1)} className="text-[10px] text-gray-500 hover:text-white disabled:opacity-20 uppercase font-mono tracking-widest transition-colors">Next</button>
+          <button disabled={currentPage === 1} onClick={() => setCurrentPage(p => p - 1)} className="text-[10px] text-muted hover:text-white disabled:opacity-20 uppercase font-mono tracking-widest transition-colors">Prev</button>
+          <span className="font-mono text-[10px] text-muted">{currentPage} / {totalPages}</span>
+          <button disabled={currentPage === totalPages} onClick={() => setCurrentPage(p => p + 1)} className="text-[10px] text-muted hover:text-white disabled:opacity-20 uppercase font-mono tracking-widest transition-colors">Next</button>
         </div>
       )}
     </div>

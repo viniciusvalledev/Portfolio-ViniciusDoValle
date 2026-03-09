@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Header } from './components/Layout/Header';
-import { Navigation } from './components/Layout/Navigation';
+import { TopNav } from './components/Layout/TopNav';
 import { Footer } from './components/Layout/Footer';
 import { About } from './components/tabs/About';
 import { Experience } from './components/tabs/Experience';
@@ -18,12 +18,10 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-[#060913] text-slate-400 font-sans p-4 md:p-6 selection:bg-blue-500/30">
-      {/* max-w-5xl deixa o layout mais compacto como o do Caio */}
-      <div className="max-w-5xl mx-auto space-y-6"> 
-        
-        <Header />
+      <TopNav activeTab={activeTab} setActiveTab={setActiveTab} />
 
-        <Navigation activeTab={activeTab} setActiveTab={setActiveTab} />
+      <div className="pt-20 max-w-5xl mx-auto space-y-6"> 
+        <Header setActiveTab={setActiveTab} />
 
         <main className="min-h-[300px]">
           {activeTab === 'about' && <About skills={skills} />}

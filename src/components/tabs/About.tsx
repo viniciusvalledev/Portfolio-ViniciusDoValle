@@ -1,5 +1,6 @@
 import React from 'react';
 import { Linkedin, Github, Instagram } from 'lucide-react';
+import { Card } from '../UI/card';
 
 interface AboutProps {
   skills: string[];
@@ -9,8 +10,7 @@ export const About: React.FC<AboutProps> = ({ skills }) => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-6 animate-fade-in items-start">
       {/* Skills */}
-      <div className="md:col-span-2 bg-[#0b101e]/60 backdrop-blur-sm card-border-custom p-4 md:p-6 border-slate-800/60 ring-1 ring-transparent hover:ring-blue-400/30 hover:shadow-[0_0_20px_rgba(59,130,246,0.08)] transition-shadow">
-        <h3 className="text-xs text-slate-500 font-mono tracking-widest mb-6 uppercase">Skills</h3>
+      <Card title="Skills" className="md:col-span-2 h-full">
         <div className="flex flex-wrap gap-3">
           {skills.map(skill => (
             <span key={skill} className="bg-[#121929] border border-slate-800 text-slate-300 px-3 py-1.5 rounded-md text-[11px] font-mono hover:border-blue-500/50 hover:text-blue-400 transition-colors cursor-default">
@@ -18,12 +18,10 @@ export const About: React.FC<AboutProps> = ({ skills }) => {
             </span>
           ))}
         </div>
-      </div>
+      </Card>
 
       {/* Social Networks (substitui o card de Certificações) */}
-      <div className="bg-[#0b101e]/60 backdrop-blur-sm card-border-custom p-4 md:p-6 border-slate-800/60 ring-1 ring-transparent hover:ring-blue-400/30 hover:shadow-[0_0_12px_rgba(59,130,246,0.06)] transition-shadow">
-        <h3 className="text-xs text-slate-500 font-mono tracking-widest mb-6 uppercase">Social Networks</h3>
-
+      <Card title="Social Networks" className="h-full">
         <div className="flex flex-col items-start">
           <div className="flex items-center gap-4 mb-4">
             <a href="https://github.com/viniciusvalledev" target="_blank" rel="noreferrer" aria-label="GitHub" className="flex items-center justify-center w-9 h-9 rounded-md bg-transparent border border-slate-800/40 text-slate-300 hover:border-blue-400/40 hover:text-blue-300 transition-colors">
@@ -45,11 +43,10 @@ export const About: React.FC<AboutProps> = ({ skills }) => {
 
           <div className="text-[12px] text-slate-400 font-mono">Siga-me: atualizações de projetos, fotos e novidades rápidas.</div>
         </div>
-      </div>
+      </Card>
 
       {/* Formação */}
-      <div className="md:col-span-2 bg-[#0b101e]/60 backdrop-blur-sm card-border-custom p-4 md:p-6 border-slate-800/60 ring-1 ring-transparent hover:ring-blue-400/30 hover:shadow-[0_0_20px_rgba(59,130,246,0.08)] transition-shadow">
-        <h3 className="text-xs text-slate-500 font-mono tracking-widest mb-6 uppercase">Formação</h3>
+      <Card title="Formação" className="md:col-span-2 h-full">
         <div className="space-y-6">
           <div>
             <h4 className="text-slate-100 font-bold text-2xl mb-2">Bacharelado em Ciência da Computação</h4>
@@ -62,11 +59,10 @@ export const About: React.FC<AboutProps> = ({ skills }) => {
             </div>
           </div>
         </div>
-      </div>
+      </Card>
 
       {/* Status */}
-      <div className="bg-[#0b101e]/60 backdrop-blur-sm card-border-custom status-box border-slate-800/60 ring-1 ring-transparent hover:ring-blue-400/30 hover:shadow-[0_0_20px_rgba(59,130,246,0.08)] transition-shadow">
-        <h3 className="text-xs text-slate-500 font-mono tracking-widest mb-6 uppercase">Status</h3>
+      <Card title="Status" className="h-full">
         <div className="status-list text-sm font-mono text-slate-300">
           <div className="status-item">
             <span className="status-dot bg-green-500 animate-pulse" />
@@ -81,7 +77,7 @@ export const About: React.FC<AboutProps> = ({ skills }) => {
             <span className="font-bold">Software Developer Jr.</span>
           </div>
         </div>
-      </div>
+      </Card>
     </div>
   );
 };

@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import { MapPin } from 'lucide-react';
 
-export const Header: React.FC = () => {
+interface HeaderProps {
+  setActiveTab: (tab: string) => void;
+}
+
+export const Header: React.FC<HeaderProps> = ({ setActiveTab }) => {
   const fullName = 'Vinicius Valle';
   const [typedName, setTypedName] = useState('');
 
   useEffect(() => {
     let mounted = true;
     let i = 0;
-    const speed = 90;
+    const speed = 70;
 
     const tick = () => {
       if (!mounted) return;
@@ -26,71 +29,62 @@ export const Header: React.FC = () => {
   }, [fullName]);
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-      <div className="lg:col-span-2 bg-[#0b101e] border border-slate-800/80 rounded-xl p-8 flex flex-col md:flex-row items-center md:items-start gap-8">
-        <div className="relative shrink-0">
-          {/* Foto de perfil - altere o src para a imagem em public/ que desejar */}
-          <img src="/foto-perfil.jpeg" alt="Vinicius Valle" className="w-32 h-32 rounded-full border border-slate-700 object-cover" />
-          <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 flex items-center gap-1.5 bg-[#0b101e] px-2 py-0.5 rounded-full border border-slate-800">
-            <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse shadow-[0_0_8px_rgba(34,197,94,0.6)]"></span>
-            <span className="text-[10px] font-bold tracking-widest text-green-500 uppercase">Online</span>
+    <section className="hero grid grid-cols-1 md:grid-cols-8 gap-6 items-start">
+      <div className="md:col-span-2 flex flex-col items-center md:items-start gap-4">
+        <img src="/foto-perfil.jpeg" alt="Perfil" className="w-36 h-36 rounded-full border border-white/5 object-cover shadow-[0_8px_40px_rgba(0,229,255,0.06)]" />
+        <div className="flex flex-col items-center md:items-start gap-2">
+          <div className="flex gap-2">
+            <a href="https://github.com/viniciusvalledev" target="_blank" rel="noreferrer" className="brand-link">GitHub</a>
+            <a href="https://linkedin.com/in/viniciusvalledev" target="_blank" rel="noreferrer" className="brand-link">LinkedIn</a>
           </div>
-        </div>
 
-        <div className="flex-1 text-center md:text-left">
-          <div className="text-blue-500 font-mono text-xs font-bold tracking-widest mb-2">
-            &lt;/&gt; SOFTWARE_DEVELOPER
-          </div>
-          <h1 className="text-4xl md:text-5xl font-bold text-slate-100 mb-4 tracking-tight">
-            <span className="text-slate-600 font-mono font-normal">&lt;</span>
-            <span className="inline-block">
-              {typedName}
-              <span className="type-cursor" aria-hidden="true" />
-            </span>
-            <span className="text-slate-600 font-mono font-normal">/&gt;</span>
-          </h1>
-          <p className="text-slate-400 text-sm leading-relaxed mb-4 max-w-md">
-            Desenvolvedor de Software focado em Java, Node.js e Web development.
-          </p>
-          {/* Localização com ícone */}
-          <div className="flex items-center justify-center md:justify-start gap-2 text-xs text-slate-500 font-mono uppercase tracking-widest">
-            <MapPin className="w-4 h-4 text-slate-500" strokeWidth={1.5} />
-            Saquarema, RJ
+          <div className="mt-1">
+            <a href="https://instagram.com/vinxvp" target="_blank" rel="noreferrer" className="brand-link">Instagram</a>
           </div>
         </div>
       </div>
 
-      <div className="flex flex-col gap-4">
-        {[
-          { label: 'Atuação Atual', title: 'Prefeitura de Saquarema', sub: 'FullStack Dev', image: '/pref-saqua.jpg' },
-          { label: 'Projetos Ativos', title: 'Portal MEIs & Outlet API', sub: 'TypeScript / Node.js' },
-          { label: 'Idiomas', title: 'Cultura Inglesa', sub: 'Master 1 (C1/C2)' },
-        ].map((item, idx) => (
-          <div key={idx} className={`group ${item.image ? 'image-card' : 'bg-[#0b101e] card-border-custom'} rounded-xl overflow-hidden`}>
-            {item.image ? (
-              <div className="relative h-24 sm:h-20">
-                <div className="card-image" style={{ backgroundImage: `url(${item.image})` }} />
-                <div className="card-overlay" />
-                <div className="card-content">
-                  <div>
-                    <div className="card-label">{item.label}</div>
-                    <div className="card-title">{item.title}</div>
-                    <div className="card-sub">{item.sub}</div>
-                  </div>
-                </div>
-              </div>
-            ) : (
-              <div className="bg-[#0b101e] card-border-custom rounded-xl p-4 flex items-center justify-between group">
-                <div>
-                  <div className="text-[10px] text-blue-500 font-mono font-bold tracking-widest mb-1 uppercase">{item.label}</div>
-                  <div className="text-sm font-semibold text-slate-200 group-hover:text-blue-400 transition-colors">{item.title}</div>
-                  <div className="text-xs text-slate-500">{item.sub}</div>
-                </div>
-              </div>
-            )}
-          </div>
-        ))}
+      <div className="md:col-span-4 text-center md:text-left">
+        <div className="text-sm font-mono text-primary mb-2">&lt;/&gt; SOFTWARE_DEVELOPER</div>
+        <h1 className="text-4xl md:text-5xl font-extrabold mb-2" style={{ color: 'var(--text)' }}>
+          {typedName}
+          <span className="type-cursor" aria-hidden="true" />
+        </h1>
+        <p className="text-muted leading-relaxed mb-4 max-w-xl">Desenvolvedor Fullstack com foco em aplicações web modernas, boas práticas e performance. Trabalho com Java, Node.js e front-end moderno.</p>
+
+        <div className="flex flex-wrap gap-3 items-center justify-center md:justify-start">
+          <button onClick={() => setActiveTab('projects')} className="cta">Ver portfólio</button>
+          <a href="mailto:contatoviniciusvalledev@gmail.com" className="brand-link ml-2">Entrar em contato</a>
+        </div>
+
+        <div className="mt-4 flex flex-wrap gap-2">
+          {['Java','Node.js','TypeScript','React','Docker'].map(s => (
+            <span key={s} className="brand-tag">{s}</span>
+          ))}
+        </div>
       </div>
-    </div>
+
+      <aside className="md:col-span-2">
+        <div className="brand-card p-4 mb-4">
+          <div className="text-[10px] text-muted uppercase">Atuação Atual</div>
+          <div className="text-white font-semibold">Prefeitura de Saquarema</div>
+          <div className="text-muted text-sm">FullStack Dev</div>
+        </div>
+
+        <div className="brand-card p-4 mb-4">
+          <div className="text-[10px] text-muted uppercase">Idiomas</div>
+          <div className="text-white font-semibold">Cultura Inglesa</div>
+          <div className="text-muted text-sm">Master 1 (C1/C2)</div>
+        </div>
+
+        <div className="brand-card p-4">
+          <div className="text-[10px] text-muted uppercase">Status</div>
+          <div className="flex items-center gap-2 mt-2">
+            <span className="w-3 h-3 rounded-full bg-green-400" />
+            <div className="text-muted">Disponível para conversas</div>
+          </div>
+        </div>
+      </aside>
+    </section>
   );
 };

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Award } from 'lucide-react'; 
+import { Card } from '../UI/card';
 
 interface CertificationItem {
   issuer: string;
@@ -58,30 +59,27 @@ export const Certification: React.FC = () => {
     <div id="certification" className="py-4 animate-fade-in">
       <div>
         {/* Section header */}
-        <div className="flex items-center gap-4 mb-10">
-          <Award className="text-blue-500 w-5 h-5" strokeWidth={1.5} />
-          <div>
-            <p className="text-[10px] font-mono tracking-[0.3em] text-blue-500 uppercase mb-1">Certificates</p>
-            <h2 className="text-3xl font-bold text-white tracking-tight">
-              <span className="text-gray-600 font-mono font-normal">{"<"}</span>
+        <div className="flex items-center gap-4 mb-6">
+          <Award className="text-primary w-5 h-5" strokeWidth={1.5} />
+          <div className="flex flex-col items-start">
+            <p className="text-[10px] font-mono tracking-[0.3em] text-primary uppercase mb-1">Certificates</p>
+            <h2 className="text-3xl font-bold" style={{ color: 'var(--text)' }}>
+              <span className="text-muted font-mono font-normal">{"<"}</span>
               Certification
-              <span className="text-gray-600 font-mono font-normal">{"/>"}</span>
+              <span className="text-muted font-mono font-normal">{"/>"}</span>
             </h2>
           </div>
         </div>
 
         {/* Grid de Cards Estilo Bento */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 lg:auto-rows-[220px]">
+        <div className="grid grid-flow-row-dense auto-rows-fr grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {certifications.map((cert, i) => (
             cert.url ? (
-              <a key={i} href={cert.url} target="_blank" rel="noreferrer" aria-label={`Open certificate ${cert.title}`} className="no-underline">
-                <div
-                  className={`bg-[#0b101e] border p-5 flex flex-col justify-between transition-all duration-300 group hover:-translate-y-1 ${cert.cardClass}`}
-                >
-                  {/* Topo do Card */}
+              <a key={i} href={cert.url} target="_blank" rel="noreferrer" aria-label={`Open certificate ${cert.title}`} className="no-underline block">
+                <Card className={`h-full flex flex-col justify-between p-5 transition-all duration-300 group hover:-translate-y-1 ${cert.cardClass ?? ''}`} borderColor={cert.issuerColor}>
                   <div>
                     <div className="flex items-center justify-between gap-2 mb-2">
-                      <span className={`text-xs font-bold tracking-tight uppercase ${cert.issuerColor}`}>
+                      <span className={`text-xs font-bold tracking-tight uppercase`}>
                         {cert.issuer}
                       </span>
                       {cert.current && (
@@ -104,12 +102,10 @@ export const Certification: React.FC = () => {
                     </div>
                   </div>
 
-                  {/* Descrição Central */}
                   <p className="text-[11px] text-gray-400 line-clamp-3 font-light leading-relaxed my-2">
                     {cert.description}
                   </p>
 
-                  {/* Tags/Tecnologias no Rodapé */}
                   <div className="flex flex-wrap gap-1.5">
                     {cert.tags.map((tag) => (
                       <span
@@ -120,55 +116,55 @@ export const Certification: React.FC = () => {
                       </span>
                     ))}
                   </div>
-                </div>
+                </Card>
               </a>
             ) : (
              <div
                key={i}
-              className={`bg-[#0b101e] border p-5 flex flex-col justify-between transition-all duration-300 group hover:-translate-y-1 ${cert.cardClass}`}
+              className={`no-underline block`}
              >
-               {/* Topo do Card */}
-               <div>
-                 <div className="flex items-center justify-between gap-2 mb-2">
-                   <span className={`text-xs font-bold tracking-tight uppercase ${cert.issuerColor}`}>
-                     {cert.issuer}
-                   </span>
-                   {cert.current && (
-                     <span className="flex items-center gap-1 flex-shrink-0">
-                       <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
-                       <span className="font-mono text-[9px] text-green-500 uppercase">Atual</span>
+               <Card className={`h-full flex flex-col justify-between p-5 transition-all duration-300 group hover:-translate-y-1 ${cert.cardClass ?? ''}`} borderColor={cert.issuerColor}>
+                 {/* Topo do Card */}
+                 <div>
+                   <div className="flex items-center justify-between gap-2 mb-2">
+                     <span className={`text-xs font-bold tracking-tight uppercase`}>
+                       {cert.issuer}
                      </span>
-                   )}
+                     {cert.current && (
+                       <span className="flex items-center gap-1 flex-shrink-0">
+                         <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
+                         <span className="font-mono text-[9px] text-green-500 uppercase">Atual</span>
+                       </span>
+                     )}
+                   </div>
+
+                   <h3 className="text-sm font-bold text-white leading-tight mb-1">
+                     {cert.title}
+                   </h3>
+
+                   <div className="flex items-center gap-2">
+                     <span className="font-mono text-[9px] text-gray-400">{cert.period}</span>
+                     <span className="font-mono text-[9px] px-1.5 py-0.5 border border-blue-500/10 text-gray-500 uppercase">
+                       {cert.type}
+                     </span>
+                   </div>
                  </div>
 
-                 <h3 className="text-sm font-bold text-white leading-tight mb-1">
-                   {cert.title}
-                 </h3>
+                 <p className="text-[11px] text-gray-400 line-clamp-3 font-light leading-relaxed my-2">
+                   {cert.description}
+                 </p>
 
-                 <div className="flex items-center gap-2">
-                   <span className="font-mono text-[9px] text-gray-400">{cert.period}</span>
-                   <span className="font-mono text-[9px] px-1.5 py-0.5 border border-blue-500/10 text-gray-500 uppercase">
-                     {cert.type}
-                   </span>
+                 <div className="flex flex-wrap gap-1.5">
+                   {cert.tags.map((tag) => (
+                     <span
+                       key={tag}
+                       className="font-mono text-[9px] px-2 py-0.5 bg-[#121929] border border-white/5 text-gray-400 group-hover:border-blue-500/20 transition-colors"
+                     >
+                       {tag}
+                     </span>
+                   ))}
                  </div>
-               </div>
-
-               {/* Descrição Central */}
-               <p className="text-[11px] text-gray-400 line-clamp-3 font-light leading-relaxed my-2">
-                 {cert.description}
-               </p>
-
-               {/* Tags/Tecnologias no Rodapé */}
-               <div className="flex flex-wrap gap-1.5">
-                 {cert.tags.map((tag) => (
-                   <span
-                     key={tag}
-                     className="font-mono text-[9px] px-2 py-0.5 bg-[#121929] border border-white/5 text-gray-400 group-hover:border-blue-500/20 transition-colors"
-                   >
-                     {tag}
-                   </span>
-                 ))}
-               </div>
+               </Card>
              </div>
             )
            ))}
