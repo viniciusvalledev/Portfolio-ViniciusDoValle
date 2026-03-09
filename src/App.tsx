@@ -6,6 +6,7 @@ import { About } from './components/tabs/About';
 import { Experience } from './components/tabs/Experience';
 import { Projects } from './components/tabs/Projects';
 import { Contact } from './components/tabs/Contact';
+import { Certification } from './components/tabs/Certification';
 
 export default function App() {
   const [activeTab, setActiveTab] = useState('about');
@@ -27,6 +28,7 @@ export default function App() {
         <main className="min-h-[300px]">
           {activeTab === 'about' && <About skills={skills} />}
           {activeTab === 'experience' && <Experience />}
+          {activeTab === 'certification' && <Certification />}
           {activeTab === 'projects' && <Projects />}
           {activeTab === 'contact' && <Contact />}
         </main>

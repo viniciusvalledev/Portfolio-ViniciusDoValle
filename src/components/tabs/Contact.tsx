@@ -14,7 +14,14 @@ export const Contact: React.FC = () => {
     <div className="animate-fade-in space-y-8">
       <div className="flex items-center gap-4 mb-10">
         <Mail className="text-blue-500 w-5 h-5" strokeWidth={1.5} />
-        <h2 className="text-3xl font-bold text-slate-100">&lt;Contact/&gt;</h2>
+        <div className="flex flex-col items-start">
+          <p className="text-[10px] font-mono tracking-[0.3em] text-blue-500 uppercase mb-1">Personal</p>
+          <h2 className="text-3xl font-bold text-slate-100 tracking-tight">
+            <span className="text-gray-500 font-mono font-normal">{"<"}</span>
+            Contact
+            <span className="text-gray-500 font-mono font-normal">{"/>"}</span>
+          </h2>
+        </div>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {links.map((link) => (

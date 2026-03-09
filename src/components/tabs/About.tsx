@@ -1,4 +1,5 @@
 import React from 'react';
+import { Linkedin, Github, Instagram } from 'lucide-react';
 
 interface AboutProps {
   skills: string[];
@@ -19,12 +20,30 @@ export const About: React.FC<AboutProps> = ({ skills }) => {
         </div>
       </div>
 
-      {/* Certificações */}
-      <div className="bg-[#0b101e]/60 backdrop-blur-sm card-border-custom p-4 md:p-6 border-slate-800/60 ring-1 ring-transparent hover:ring-blue-400/30 hover:shadow-[0_0_20px_rgba(59,130,246,0.08)] transition-shadow">
-        <h3 className="text-xs text-slate-500 font-mono tracking-widest mb-6 uppercase">Certificações</h3>
-        <div className="flex gap-4 items-center justify-center h-20">
-           {/* Seus links de certificados aqui */}
-           <div className="text-[10px] text-slate-500 font-mono text-center">Java POO & English Master</div>
+      {/* Social Networks (substitui o card de Certificações) */}
+      <div className="bg-[#0b101e]/60 backdrop-blur-sm card-border-custom p-4 md:p-6 border-slate-800/60 ring-1 ring-transparent hover:ring-blue-400/30 hover:shadow-[0_0_12px_rgba(59,130,246,0.06)] transition-shadow">
+        <h3 className="text-xs text-slate-500 font-mono tracking-widest mb-6 uppercase">Social Networks</h3>
+
+        <div className="flex flex-col items-start">
+          <div className="flex items-center gap-4 mb-4">
+            <a href="https://github.com/viniciusvalledev" target="_blank" rel="noreferrer" aria-label="GitHub" className="flex items-center justify-center w-9 h-9 rounded-md bg-transparent border border-slate-800/40 text-slate-300 hover:border-blue-400/40 hover:text-blue-300 transition-colors">
+              <Github className="w-4 h-4" />
+            </a>
+            <a href="https://www.linkedin.com/in/viniciusvalledev/" target="_blank" rel="noreferrer" aria-label="LinkedIn" className="flex items-center justify-center w-9 h-9 rounded-md bg-transparent border border-slate-800/40 text-slate-300 hover:border-blue-400/40 hover:text-blue-300 transition-colors">
+              <Linkedin className="w-4 h-4" />
+            </a>
+            <a href="https://www.instagram.com/vinxvp/" target="_blank" rel="noreferrer" aria-label="Instagram" className="flex items-center justify-center w-9 h-9 rounded-md bg-transparent border border-slate-800/40 text-slate-300 hover:border-blue-400/40 hover:text-blue-300 transition-colors">
+              <Instagram className="w-4 h-4" />
+            </a>
+            {/* TikTok — SVG inline */}
+            <a href="https://www.tiktok.com/@vinxvpdev?_r=1&_t=ZS-94XCFy6cs3I" target="_blank" rel="noreferrer" aria-label="TikTok" className="flex items-center justify-center w-9 h-9 rounded-md bg-transparent border border-slate-800/40 text-slate-300 hover:border-blue-400/40 hover:text-blue-300 transition-colors">
+              <svg className="w-4 h-4" viewBox="0 0 256 256" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M200.4 72.6c-13.6-3.6-26.8-11.2-36.8-21.6v92.8c0 25.6-20.8 46.4-46.4 46.4-25.6 0-46.4-20.8-46.4-46.4s20.8-46.4 46.4-46.4c8.8 0 17 2.8 23.6 7.6V85.2c-8-5.6-17.6-8.8-27.6-8.8-30.4 0-55.2 24.8-55.2 55.2s24.8 55.2 55.2 55.2 55.2-24.8 55.2-55.2V56h28.8c0 0 .8 9.2 5.6 16.6z" />
+              </svg>
+            </a>
+          </div>
+
+          <div className="text-[12px] text-slate-400 font-mono">Siga-me: atualizações de projetos, fotos e novidades rápidas.</div>
         </div>
       </div>
 

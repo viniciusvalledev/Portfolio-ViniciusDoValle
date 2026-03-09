@@ -26,7 +26,6 @@ export const Experience: React.FC = () => {
       current: true,
       cardClass: "border-teal-500/20 hover:border-teal-500/40"
     },
-    // Adicione mais experiências aqui seguindo o mesmo padrão
   ];
 
   return (

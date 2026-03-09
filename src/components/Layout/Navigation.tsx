@@ -6,7 +6,7 @@ interface NavigationProps {
 }
 
 export const Navigation: React.FC<NavigationProps> = ({ activeTab, setActiveTab }) => {
-  const tabs = ['about', 'experience', 'projects', 'contact'];
+  const tabs = ['about', 'experience', 'certification', 'projects', 'contact'];
 
   const getTabClass = (tabName: string) => {
     const baseClass = "pb-2 font-mono tracking-widest text-xs transition-all cursor-pointer uppercase ";

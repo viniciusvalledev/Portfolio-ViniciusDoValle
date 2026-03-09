@@ -63,7 +63,7 @@ export const Header: React.FC = () => {
       <div className="flex flex-col gap-4">
         {[
           { label: 'Atuação Atual', title: 'Prefeitura de Saquarema', sub: 'FullStack Dev', image: '/pref-saqua.jpg' },
-          { label: 'Projetos Ativos', title: 'Portal MEIs & Outlet API', sub: 'Java / Node.js' },
+          { label: 'Projetos Ativos', title: 'Portal MEIs & Outlet API', sub: 'TypeScript / Node.js' },
           { label: 'Idiomas', title: 'Cultura Inglesa', sub: 'Master 1 (C1/C2)' },
         ].map((item, idx) => (
           <div key={idx} className={`group ${item.image ? 'image-card' : 'bg-[#0b101e] card-border-custom'} rounded-xl overflow-hidden`}>
