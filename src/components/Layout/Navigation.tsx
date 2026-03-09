@@ -8,26 +8,42 @@ interface NavigationProps {
 export const Navigation: React.FC<NavigationProps> = ({ activeTab, setActiveTab }) => {
   const tabs = ['about', 'experience', 'certification', 'projects', 'contact'];
 
-  const getTabClass = (tabName: string) => {
-    const baseClass = "pb-2 font-mono tracking-widest text-xs transition-all cursor-pointer uppercase ";
+  const getTabClass = (tabName: string, isContact = false) => {
+    const base = "font-mono tracking-widest text-sm transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500";
+    // mobile: botões em duas colunas, alvo de toque maior
+    const mobile = isContact ? "w-3/4 text-center py-3 rounded-lg" : "w-full text-center py-3 rounded-lg";
+    // desktop volta a ser inline e menor
+    const desktop = "md:w-auto md:inline-flex md:py-2 md:px-1";
+
     if (activeTab === tabName) {
-      return baseClass + "text-blue-400 border-b-2 border-blue-500 font-semibold";
+      return `${base} ${mobile} ${desktop} bg-gradient-to-r from-blue-900/25 to-transparent text-blue-300 border border-blue-600 shadow-inner font-semibold`;
     }
-    return baseClass + "text-slate-500 border-b-2 border-transparent hover:text-slate-300";
+
+    return `${base} ${mobile} ${desktop} text-slate-400 hover:text-slate-200 hover:bg-slate-800/50 border border-transparent`;
   };
 
   return (
     <div className="border-b border-slate-800/80">
-      <nav className="flex gap-4 md:gap-6 px-1">
-        {tabs.map(tab => (
-          <button 
-            key={tab} 
-            onClick={() => setActiveTab(tab)} 
-            className={getTabClass(tab)}
-          >
-            [{tab}]
-          </button>
-        ))}
+      {/* Em mobile usamos grid 2 colunas para facilitar toques; em md volta para flex horizontal */}
+      <nav className="grid grid-cols-2 gap-2 px-3 py-2 md:flex md:flex-wrap md:gap-6">
+        {tabs.map(tab => {
+          const isContact = tab === 'contact';
+          // wrapper aplica col-span-2 para centralizar o contact em mobile
+          const wrapperClass = isContact ? 'col-span-2 flex justify-center md:col-auto' : '';
+          return (
+            <div key={tab} className={wrapperClass}>
+              <button
+                type="button"
+                aria-pressed={activeTab === tab}
+                aria-label={tab}
+                onClick={() => setActiveTab(tab)}
+                className={getTabClass(tab, isContact)}
+              >
+                {`[${tab}]`}
+              </button>
+            </div>
+          );
+        })}
       </nav>
     </div>
   );
