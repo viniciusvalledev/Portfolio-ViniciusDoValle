@@ -8,7 +8,8 @@ interface Project {
   summary: string;
   tech: string[];
   featured: boolean;
-  link: string;
+  link?: string; // nome do repo ou caminho curto (opcional)
+  publicLink?: string | null; // URL completa para repositório/demo público (opcional)
   borderColor: string;
 }
 
@@ -18,42 +19,42 @@ export const Projects: React.FC = () => {
   const allProjects: Project[] = [
     {
       id: 1,
-      name: 'MeiDeSaqua-Back',
+      name: 'Mei De Saqua',
       date: '2026',
-      summary: 'Arquitetura de backend escalável para suporte a microempreendedores de Saquarema.',
-      tech: ['TypeScript', 'Node.js', 'Docker'],
+      summary: 'Portal completo para microempreendedores de Saquarema: frontend responsivo com painel de gerenciamento, páginas públicas de negócios, buscas e filtros, além de interfaces para cadastro e comunicação. O backend suporta integrações e dados em produção, porém é privado e não está publicado — entre em contato para demonstração ou acesso restrito.',
+      tech: ['TypeScript', 'Node.js', 'Docker', 'React'],
       featured: true,
-      link: 'MeiDeSaqua-Back',
-      borderColor: '#5b686d:'
+      publicLink: 'https://github.com/viniciusvalledev',
+      borderColor: '#5b686d'
     },
     {
       id: 2,
-      name: 'AquiTemODS-Back',
+      name: 'Aqui Tem ODS',
       date: '2026',
-      summary: 'Backend em TypeScript para projeto que apresenta e gerencia conteúdos relacionados aos ODS.',
-      tech: ['TypeScript', 'Node.js', 'PostgreSQL'],
+      summary: 'Plataforma educativa para divulgação dos Objetivos de Desenvolvimento Sustentável (ODS): frontend com navegação por metas, páginas de conteúdo, filtros, e recursos interativos voltados para acessibilidade e performance. O sistema de gestão de conteúdo e APIs estão em infraestrutura privada e não são publicados publicamente.',
+      tech: ['TypeScript', 'Node.js', 'MySQL', 'React'],
       featured: true,
-      link: 'AquiTemODS-Back',
+      publicLink: 'https://github.com/viniciusvalledev',
       borderColor: '#6699CC'
     },
     {
       id: 3,
-      name: 'ExploreSaqua-Back',
+      name: 'Explore Saqua',
       date: '2025',
-      summary: 'Backend em TypeScript para portal de exploração de pontos e eventos locais.',
-      tech: ['TypeScript', 'Node.js', 'PostgreSQL'],
+      summary: 'Projeto end-to-end para exploração de pontos e eventos locais: frontend responsivo com mapas interativos, listagens e filtros, e backend completo para gerenciamento de dados, autenticação e APIs. Implementação entregue como solução ponta a ponta.',
+      tech: ['TypeScript', 'Node.js', 'MySQL', 'React'],
       featured: false,
-      link: 'ExploreSaqua-Back',
+      publicLink: 'https://github.com/viniciusvalledev',
       borderColor: '#6699CC'
     },
     {
       id: 4,
-      name: 'ApaixoneSe-Back',
+      name: 'Apaixone-Se',
       date: '2025',
-      summary: 'Serviços backend em TypeScript com autenticação e integração de terceiros.',
-      tech: ['TypeScript', 'Node.js', 'Prisma'],
+      summary: 'Projeto end-to-end que conecta usuários a experiências locais: inclui frontend para descoberta e curadoria e backend para gerenciamento de usuários, recomendações e integrações de terceiros. Solução entregue completa (front + back).',
+      tech: ['TypeScript', 'Node.js', 'MySQL', 'React'],
       featured: false,
-      link: 'ApaixoneSe-Back',
+      publicLink: 'https://github.com/viniciusvalledev',
       borderColor: '#6699CC'
     },
     {
@@ -68,7 +69,7 @@ export const Projects: React.FC = () => {
     },
     {
       id: 6,
-      name: 'caboFrioOutlet-Back',
+      name: 'Cabo Frio Outlet',
       date: '2025',
       summary: 'Sistema backend para multimarcas com lógica de inventário e pedidos.',
       tech: ['Java', 'Spring Boot', 'MySQL'],
@@ -88,16 +89,6 @@ export const Projects: React.FC = () => {
     },
     {
       id: 8,
-      name: 'caboFrioOutlet-Front',
-      date: '2025',
-      summary: 'Frontend moderno para e-commerce multimarcas com foco em performance e UX.',
-      tech: ['React', 'Tailwind', 'TypeScript'],
-      featured: false,
-      link: 'caboFrioOutlet-Front',
-      borderColor: '#6699CC'
-    },
-    {
-      id: 9,
       name: 'Product-Control-Back',
       date: '2025',
       summary: 'API em Java para controle de produtos, inventário e operações CRUD.',
@@ -107,7 +98,7 @@ export const Projects: React.FC = () => {
       borderColor: '#6699CC'
     },
     {
-      id: 10,
+      id: 9,
       name: 'Product-Control-Front',
       date: '2025',
       summary: 'Frontend de gestão de produtos com filtros, tabelas e integração com o backend.',
@@ -117,7 +108,7 @@ export const Projects: React.FC = () => {
       borderColor: '#6699CC'
     },
     {
-      id: 11,
+      id: 10,
       name: 'avs-store',
       date: '2025',
       summary: 'Loja online de exemplo com catálogo e carrinho simples.',
@@ -127,7 +118,7 @@ export const Projects: React.FC = () => {
       borderColor: '#6699CC'
     },
     {
-      id: 12,
+      id: 11,
       name: 'SaaS-controle-financeiro',
       date: '2025',
       summary: 'Plataforma SaaS para controle financeiro com dashboards e relatórios.',
@@ -137,7 +128,7 @@ export const Projects: React.FC = () => {
       borderColor: '#6699CC'
     },
     {
-      id: 13,
+      id: 12,
       name: 'CRUD-simples-em-java',
       date: '2025',
       summary: 'Exemplo simples de CRUD em Java para demonstrar conceitos básicos.',
@@ -183,7 +174,15 @@ export const Projects: React.FC = () => {
           const renderOrder = [...featuredThisPage, ...normalThisPage];
 
           return renderOrder.map((p) => {
-            const repoUrl = p.link ? `https://github.com/viniciusvalledev/${p.link}` : null;
+            const githubBase = 'https://github.com/viniciusvalledev';
+            let repoUrl: string | null = null;
+            if (p.publicLink) {
+              repoUrl = p.publicLink;
+            } else if (p.link && !/back$/i.test(p.link)) {
+              repoUrl = `${githubBase}/${p.link}`;
+            } else {
+              repoUrl = null;
+            }
             const featuredIndex = p.featured ? featuredThisPage.findIndex(fp => fp.id === p.id) : -1;
             
             if (p.featured) {
