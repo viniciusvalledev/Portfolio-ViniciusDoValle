@@ -50,7 +50,7 @@ export const About: React.FC<AboutProps> = ({ skills }) => {
         <div className="space-y-6">
           <div>
             <h4 className="text-slate-100 font-bold text-2xl mb-2">Bacharelado em Ciência da Computação</h4>
-            <a href="#" className="text-blue-500 text-lg font-medium inline-block mb-3">UNESA - Universidade Estácio de Sá</a>
+            <a href="#" className="text-gray-500 text-lg font-medium inline-block mb-3">UNESA - Universidade Estácio de Sá</a>
 
             <div className="mt-4 text-[12px] font-mono text-slate-500 flex items-center gap-3">
               <span>Jan 2023 — Nov 2026</span>

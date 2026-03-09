@@ -19,7 +19,7 @@ export const Experience: React.FC = () => {
     {
       company: "Prefeitura de Saquarema",
       companyColor: "text-teal-500",
-      title: "FullStack Developer",
+      title: "Jr. FullStack Developer",
       period: "Fev 2025 — Atual",
       type: "Estágio",
       description: "Desenvolvimento de sistemas municipais e modelagem de dados para a gestão pública de Saquarema.",
