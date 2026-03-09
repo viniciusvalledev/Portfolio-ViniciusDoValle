@@ -11,6 +11,7 @@ interface ExperienceItem {
   description: string;
   tags: string[];
   current?: boolean;
+  borderColor: string; // Este campo será usado para o hexadecimal
 }
 
 export const Experience: React.FC = () => {
@@ -23,16 +24,17 @@ export const Experience: React.FC = () => {
       type: "Estágio",
       description: "Desenvolvimento de sistemas municipais e modelagem de dados para a gestão pública de Saquarema.",
       tags: ["TypeScript", "React", "Node", "MySQL"],
-      current: true
+      current: true,
+      borderColor: "#14b8a6" 
     },
   ];
 
   return (
     <div id="experience" className="py-4 animate-fade-in">
       <div className="flex items-center gap-4 mb-10">
-        <Building2 className="text-blue-500 w-5 h-5" strokeWidth={1.5} />
+        <Building2 className="text-primary w-5 h-5" strokeWidth={1.5} />
         <div>
-          <p className="text-[10px] font-mono tracking-[0.3em] text-blue-500 uppercase mb-1">Career</p>
+          <p className="text-[10px] font-mono tracking-[0.3em] text-primary uppercase mb-1">Career</p>
           <h2 className="text-3xl font-bold text-white tracking-tight">
             <span className="text-gray-600 font-mono font-normal">{"<"}</span>
             Experience
@@ -46,7 +48,7 @@ export const Experience: React.FC = () => {
           <Card 
             key={i} 
             className="h-full flex flex-col justify-between" 
-            borderColor={exp.current ? "#14b8a6" : "#334155"}
+            borderColor={exp.borderColor} 
           >
             <div>
               <div className="flex items-center justify-between gap-2 mb-1">
