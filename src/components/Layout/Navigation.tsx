@@ -6,10 +6,16 @@ interface NavigationProps {
 }
 
 export const Navigation: React.FC<NavigationProps> = ({ activeTab, setActiveTab }) => {
-  const tabs = ['about', 'experience', 'certification', 'projects', 'contact'];
+  const tabs = [
+    { id: 'about', label: 'About' },
+    { id: 'experience', label: 'Experience' },
+    { id: 'certification', label: 'Certification' },
+    { id: 'projects', label: 'Projects' },
+    { id: 'contact', label: 'Contact' },
+  ];
 
   const getTabClass = (tabName: string, isContact = false) => {
-    const base = "font-mono tracking-widest text-sm transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500";
+    const base = "font-mono tracking-widest text-sm transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 cursor-pointer";
     // mobile: botões em duas colunas, alvo de toque maior
     const mobile = isContact ? "w-3/4 text-center py-3 rounded-lg" : "w-full text-center py-3 rounded-lg";
     // desktop volta a ser inline e menor
@@ -27,19 +33,19 @@ export const Navigation: React.FC<NavigationProps> = ({ activeTab, setActiveTab 
       {/* Em mobile usamos grid 2 colunas para facilitar toques; em md volta para flex horizontal */}
       <nav className="grid grid-cols-2 gap-2 px-3 py-2 md:flex md:flex-wrap md:gap-6">
         {tabs.map(tab => {
-          const isContact = tab === 'contact';
+          const isContact = tab.id === 'contact';
           // wrapper aplica col-span-2 para centralizar o contact em mobile
           const wrapperClass = isContact ? 'col-span-2 flex justify-center md:col-auto' : '';
           return (
-            <div key={tab} className={wrapperClass}>
+            <div key={tab.id} className={wrapperClass}>
               <button
                 type="button"
-                aria-pressed={activeTab === tab}
-                aria-label={tab}
-                onClick={() => setActiveTab(tab)}
-                className={getTabClass(tab, isContact)}
+                aria-pressed={activeTab === tab.id}
+                aria-label={tab.label}
+                onClick={() => setActiveTab(tab.id)}
+                className={getTabClass(tab.id, isContact)}
               >
-                {`[${tab}]`}
+                {`[${tab.label}]`}
               </button>
             </div>
           );

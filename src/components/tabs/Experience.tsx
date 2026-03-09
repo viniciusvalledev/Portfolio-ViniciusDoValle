@@ -11,7 +11,7 @@ interface ExperienceItem {
   description: string;
   tags: string[];
   current?: boolean;
-  borderColor: string; // Este campo será usado para o hexadecimal
+  borderColor: string;
 }
 
 export const Experience: React.FC = () => {
@@ -22,7 +22,7 @@ export const Experience: React.FC = () => {
       title: "Jr. FullStack Developer",
       period: "Fev 2025 — Atual",
       type: "Estágio",
-      description: "Desenvolvimento de sistemas municipais e modelagem de dados para a gestão pública de Saquarema.",
+      description: "Responsible for building End-to-End APIs in high-demand projects at the City Hall, ensuring the performance of systems that manage peaks of over 1,000 registrations and thousands of daily accesses.",
       tags: ["TypeScript", "React", "Node", "MySQL"],
       current: true,
       borderColor: "#14b8a6" 

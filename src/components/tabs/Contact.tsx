@@ -57,7 +57,7 @@ export const Contact: React.FC = () => {
                 </div>
 
                 <div className="flex items-center justify-between">
-                  <span className="text-[9px] font-mono text-gray-400">Clique para abrir</span>
+                  <span className="text-[9px] font-mono text-gray-400">Click to open</span>
                   <span className="text-[9px] font-mono text-gray-400">→</span>
                 </div>
               </Card>

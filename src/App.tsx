@@ -13,7 +13,7 @@ export default function App() {
 
   const skills = [
     'Java', 'Spring Boot', 'Node.js', 'TypeScript', 
-    'PostgreSQL', 'MySQL', 'Docker', 'Git'
+    'PostgreSQL', 'MySQL', 'Docker', 'Git', 'AWS', 'APIs REST'
   ];
 
   return (

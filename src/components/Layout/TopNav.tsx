@@ -51,7 +51,7 @@ export const TopNav: React.FC<TopNavProps> = ({ activeTab, setActiveTab }) => {
             <button
               key={it.id}
               onClick={() => handleNavClick(it.id)}
-              className={`text-sm ${activeTab === it.id ? 'text-primary' : 'text-muted'}`}
+              className={`text-sm transition-colors duration-150 ${activeTab === it.id ? 'text-primary cursor-pointer' : 'text-muted hover:text-slate-200 hover:bg-slate-800/50 cursor-pointer'} px-2 py-1 rounded`}
               aria-current={activeTab === it.id ? 'page' : undefined}
             >
               {it.label}
@@ -62,7 +62,7 @@ export const TopNav: React.FC<TopNavProps> = ({ activeTab, setActiveTab }) => {
         <div className="top-nav__right flex items-center gap-3">
           {/* Mobile hamburger */}
           <button
-            className="md:hidden p-2 rounded-md focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
+            className="md:hidden p-2 rounded-md focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 cursor-pointer"
             aria-label={mobileOpen ? 'Fechar menu' : 'Abrir menu'}
             aria-expanded={mobileOpen}
             onClick={() => setMobileOpen(v => !v)}
@@ -103,7 +103,7 @@ export const TopNav: React.FC<TopNavProps> = ({ activeTab, setActiveTab }) => {
               <button
                 key={it.id}
                 onClick={() => handleNavClick(it.id)}
-                className={`w-full text-left py-3 px-3 rounded-md text-base ${activeTab === it.id ? 'tab-color-contact' : 'text-muted hover:text-slate-200 hover:bg-slate-800/50'}`}
+                className={`w-full text-left py-3 px-3 rounded-md text-base ${activeTab === it.id ? 'tab-color-contact cursor-pointer' : 'text-muted hover:text-slate-200 hover:bg-slate-800/50 cursor-pointer'}`}
               >
                 {it.label}
               </button>

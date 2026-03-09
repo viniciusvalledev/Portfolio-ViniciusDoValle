@@ -20,10 +20,10 @@ export const Certification: React.FC = () => {
     {
       issuer: "Alura",
       issuerColor: "#085AB6",
-      title: "Java - POO",
-      period: "Fev 2026",
-      type: "Curso",
-      description: "Curso completo de Programação Orientada a Objetos em Java, abordando conceitos fundamentais e práticas avançadas para desenvolvimento de software robusto.",
+      title: "Java - OOP",
+      period: "Feb 2026",
+      type: "Course",
+      description: "Comprehensive course on Object-Oriented Programming in Java, covering fundamental concepts and advanced practices for building robust software.",
       tags: ["TypeScript", "React", "Node"],
       current: false,
       cardClass: "border-[#085AB6]/40 hover:border-[#085AB6]/80",
@@ -32,11 +32,11 @@ export const Certification: React.FC = () => {
     {
       issuer: "Alura",
       issuerColor: "#085AB6",
-      title: "Git e GitHub - Controle e compartilhe seu código",
-      period: "Out 2025",
-      type: "Curso",
-      description: "Curso completo de Controle de Versão com Git e GitHub, abordando desde os conceitos básicos até as práticas avançadas de colaboração em projetos de software.",
-      tags: ["Git", "GitHub", "Versionamento"],
+      title: "Git & GitHub — Version Control and Collaboration",
+      period: "Oct 2025",
+      type: "Course",
+      description: "Comprehensive course on version control with Git and GitHub, covering basic concepts to advanced collaboration workflows in software projects.",
+      tags: ["Git", "GitHub", "Versioning"],
       current: false,
       cardClass: "border-[#085AB6]/40 hover:border-[#085AB6]/80",
       url: 'https://cursos.alura.com.br/formalCertificate/01cb0146-5280-4e3a-8b00-aff49197ded2'
@@ -45,10 +45,10 @@ export const Certification: React.FC = () => {
       issuer: "Alura",
       issuerColor: "#085AB6",
       title: "MySQL",
-      period: "Ago 2025",
-      type: "Curso",
-      description: "Curso completo de MySQL, abordando desde os conceitos básicos até as práticas avançadas de modelagem e otimização de bancos de dados.",
-      tags: ["MySQL", "Banco de Dados", "SQL"],
+      period: "Aug 2025",
+      type: "Course",
+      description: "Comprehensive MySQL course covering basics to advanced practices in database modeling and query optimization.",
+      tags: ["MySQL", "Databases", "SQL"],
       current: false,
       cardClass: "border-[#085AB6]/40 hover:border-[#085AB6]/80",
       url: 'https://cursos.alura.com.br/formalCertificate/7c31e5d7-c9e8-42ad-a09d-ff222280602e'
@@ -65,7 +65,7 @@ export const Certification: React.FC = () => {
             <p className="text-[10px] font-mono tracking-[0.3em] text-primary uppercase mb-1">Certificates</p>
             <h2 className="text-3xl font-bold" style={{ color: 'var(--text)' }}>
               <span className="text-muted font-mono font-normal">{"<"}</span>
-              Certification
+              Certifications
               <span className="text-muted font-mono font-normal">{"/>"}</span>
             </h2>
           </div>
@@ -85,7 +85,7 @@ export const Certification: React.FC = () => {
                       {cert.current && (
                         <span className="flex items-center gap-1 flex-shrink-0">
                           <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
-                          <span className="font-mono text-[9px] text-green-500 uppercase">Atual</span>
+                          <span className="font-mono text-[9px] text-green-500 uppercase">Current</span>
                         </span>
                       )}
                     </div>
@@ -133,7 +133,7 @@ export const Certification: React.FC = () => {
                      {cert.current && (
                        <span className="flex items-center gap-1 flex-shrink-0">
                          <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
-                         <span className="font-mono text-[9px] text-green-500 uppercase">Atual</span>
+                         <span className="font-mono text-[9px] text-green-500 uppercase">Current</span>
                        </span>
                      )}
                    </div>

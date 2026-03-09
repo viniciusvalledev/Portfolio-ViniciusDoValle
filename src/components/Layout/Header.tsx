@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { FaGithub, FaLinkedin, FaInstagram } from 'react-icons/fa';
 
 interface HeaderProps {
   setActiveTab: (tab: string) => void;
@@ -30,16 +31,19 @@ export const Header: React.FC<HeaderProps> = ({ setActiveTab }) => {
 
   return (
     <section className="hero grid grid-cols-1 md:grid-cols-8 gap-6 items-start">
-      <div className="md:col-span-2 flex flex-col items-center md:items-start gap-4">
+      <div className="md:col-span-2 flex flex-col items-center md:items-center gap-4">
         <img src="/foto-perfil.jpeg" alt="Perfil" className="w-36 h-36 rounded-full border border-white/5 object-cover shadow-[0_8px_40px_rgba(0,229,255,0.06)]" />
         <div className="flex flex-col items-center md:items-start gap-2">
-          <div className="flex gap-2">
-            <a href="https://github.com/viniciusvalledev" target="_blank" rel="noreferrer" className="brand-link">GitHub</a>
-            <a href="https://linkedin.com/in/viniciusvalledev" target="_blank" rel="noreferrer" className="brand-link">LinkedIn</a>
-          </div>
-
-          <div className="mt-1">
-            <a href="https://instagram.com/vinxvp" target="_blank" rel="noreferrer" className="brand-link">Instagram</a>
+          <div className="flex gap-3 items-center">
+            <a href="https://github.com/viniciusvalledev" target="_blank" rel="noreferrer" aria-label="GitHub" className="brand-link">
+              <FaGithub className="w-6 h-6" />
+            </a>
+            <a href="https://linkedin.com/in/viniciusvalledev" target="_blank" rel="noreferrer" aria-label="LinkedIn" className="brand-link">
+              <FaLinkedin className="w-6 h-6" />
+            </a>
+            <a href="https://instagram.com/vinxvp" target="_blank" rel="noreferrer" aria-label="Instagram" className="brand-link">
+              <FaInstagram className="w-6 h-6" />
+            </a>
           </div>
         </div>
       </div>
@@ -50,11 +54,14 @@ export const Header: React.FC<HeaderProps> = ({ setActiveTab }) => {
           {typedName}
           <span className="type-cursor" aria-hidden="true" />
         </h1>
-        <p className="text-muted leading-relaxed mb-4 max-w-xl">Desenvolvedor Fullstack com foco em aplicações web modernas, boas práticas e performance. Trabalho com Java, Node.js e front-end moderno.</p>
+
+        <div className="mb-2">
+          <p className="text-muted leading-relaxed mb-4 max-w-xl">Fullstack software developer focused on building modern software systems, best practices and performance. I work with Java, Node.js, backend services and modern frontend.</p>
+        </div>
 
         <div className="flex flex-wrap gap-3 items-center justify-center md:justify-start">
-          <button onClick={() => setActiveTab('projects')} className="cta">Ver portfólio</button>
-          <a href="mailto:contatoviniciusvalledev@gmail.com" className="brand-link ml-2">Entrar em contato</a>
+          <button onClick={() => setActiveTab('projects')} className="cta">View Portfolio</button>
+          <a href="mailto:contatoviniciusvalledev@gmail.com" className="brand-link ml-2">Contact</a>
         </div>
 
         <div className="mt-4 flex flex-wrap gap-2">
@@ -66,13 +73,13 @@ export const Header: React.FC<HeaderProps> = ({ setActiveTab }) => {
 
       <aside className="md:col-span-2">
         <div className="brand-card p-4 mb-4">
-          <div className="text-[10px] text-muted uppercase">Atuação Atual</div>
+          <div className="text-[10px] text-muted uppercase">Current Position</div>
           <div className="text-white font-semibold">Prefeitura de Saquarema</div>
           <div className="text-muted text-sm">FullStack Dev</div>
         </div>
 
         <div className="brand-card p-4 mb-4">
-          <div className="text-[10px] text-muted uppercase">Idiomas</div>
+          <div className="text-[10px] text-muted uppercase">Languages</div>
           <div className="text-white font-semibold">Cultura Inglesa</div>
           <div className="text-muted text-sm">Master 1 (C1/C2)</div>
         </div>
@@ -81,7 +88,7 @@ export const Header: React.FC<HeaderProps> = ({ setActiveTab }) => {
           <div className="text-[10px] text-muted uppercase">Status</div>
           <div className="flex items-center gap-2 mt-2">
             <span className="w-3 h-3 rounded-full bg-green-400" />
-            <div className="text-muted">Disponível para conversas</div>
+            <div className="text-muted">Available to talk</div>
           </div>
         </div>
       </aside>

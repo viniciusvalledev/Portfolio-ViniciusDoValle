@@ -20,7 +20,7 @@ export const About: React.FC<AboutProps> = ({ skills }) => {
         </div>
       </Card>
 
-      {/* Social Networks (substitui o card de Certificações) */}
+      {/* Social Networks */}
       <Card title="Social Networks" className="h-full">
         <div className="flex flex-col items-start">
           <div className="flex items-center gap-4 mb-4">
@@ -41,21 +41,21 @@ export const About: React.FC<AboutProps> = ({ skills }) => {
             </a>
           </div>
 
-          <div className="text-[12px] text-slate-400 font-mono">Siga-me: atualizações de projetos, fotos e novidades rápidas.</div>
+          <div className="text-[12px] text-slate-400 font-mono">Follow me: project updates, photos and quick news.</div>
         </div>
       </Card>
 
-      {/* Formação */}
-      <Card title="Formação" className="md:col-span-2 h-full">
+      {/* Education */}
+      <Card title="Education" className="md:col-span-2 h-full">
         <div className="space-y-6">
           <div>
-            <h4 className="text-slate-100 font-bold text-2xl mb-2">Bacharelado em Ciência da Computação</h4>
-            <a href="#" className="text-gray-500 text-lg font-medium inline-block mb-3">UNESA - Universidade Estácio de Sá</a>
+            <h4 className="text-slate-100 font-bold text-2xl mb-2">Bachelor in Computer Science</h4>
+            <a href="#" className="text-gray-500 text-lg font-medium inline-block mb-3">UNESA - Estácio de Sá University</a>
 
             <div className="mt-4 text-[12px] font-mono text-slate-500 flex items-center gap-3">
               <span>Jan 2023 — Nov 2026</span>
               <span className="inline-block w-1 h-px bg-slate-700/60 rounded" />
-              <span>7°/8° Período</span>
+              <span>7th / 8th Semester</span>
             </div>
           </div>
         </div>
@@ -66,7 +66,7 @@ export const About: React.FC<AboutProps> = ({ skills }) => {
         <div className="status-list text-sm font-mono text-slate-300">
           <div className="status-item">
             <span className="status-dot bg-green-500 animate-pulse" />
-            <span>Disponível para conversas</span>
+            <span>Available to talk</span>
           </div>
           <div className="status-item">
             <span className="status-dot bg-blue-500" />
